@@ -1,5 +1,6 @@
 package com.niit.collab.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ private BlogDAO blogDAO;
 @PostMapping(value="/createblog")
 public ResponseEntity<Blog> addblog(@RequestBody Blog blog){
 	System.out.println("hello");
+	blog.setDoc(new Date());
 	blogDAO.saveOrUpdate(blog);
 	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 	
@@ -41,4 +43,5 @@ public ResponseEntity<Blog> deleteblog(Blog blog,@PathVariable("blogid") int blo
 	blogDAO.delete(blog1);
 	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 }
+
 }
