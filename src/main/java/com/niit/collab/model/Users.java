@@ -25,6 +25,7 @@ public class Users {
 	private String address;
 	private Date dob;
 	private String gender;
+	private char status;
 	public int getId() {
 		return id;
 	}
@@ -78,6 +79,12 @@ public class Users {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public char getStatus() {
+		return status;
+	}
+	public void setStatus(char status) {
+		this.status = status;
 	}
 	
 }

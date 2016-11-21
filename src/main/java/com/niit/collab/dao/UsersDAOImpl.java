@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.collab.model.Blog;
 import com.niit.collab.model.Users;
 
 @Repository(value="usersDAO")
@@ -49,6 +50,37 @@ public class UsersDAOImpl implements UsersDAO {
 		Criteria c=sessionFactory.getCurrentSession().createCriteria(Users.class);
 		List<Users> list=c.list();
 		return list;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
+	@Transactional
+	public Users getuser(int id) {
+		String hql = "from Users where id= "+ "'"+ id+"'" ;
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<Users>list= query.list();
+		
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+	}
+	@SuppressWarnings({ "rawtypes", "deprecation", "unchecked" })
+	@Transactional
+	public Users authuser(String username, String password) {
+		String hql="from Users where username= "+"'"+username+"'"+"and password= "+"'"+password+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Users>list=query.list();
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
 	}
 
 }
