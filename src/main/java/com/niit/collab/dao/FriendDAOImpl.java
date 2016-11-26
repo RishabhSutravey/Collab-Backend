@@ -82,9 +82,12 @@ public Friend newrequest(int id) {
 	}
 }
 
-public List<Friend> getfriendlist() {
-	// TODO Auto-generated method stub
-	return null;
+@Transactional
+public List<Friend> getfriendlist(int uid) {
+	String hql="from Friend where userid= "+uid;
+	Query query=sessionFactory.getCurrentSession().createQuery(hql);
+	List<Friend> list = query.list();
+	return list;
 }
 
 }

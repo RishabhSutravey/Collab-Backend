@@ -10,6 +10,7 @@ public interface FriendDAO {
 	public boolean delete(Friend friend);
 	public Friend getFriend(int id);
 	public Friend newrequest(int id);
-	public List<Friend> getfriendlist();
+	public List<Friend> getfriendlist(int uid);
 	public List<Friend> list();
+
 }

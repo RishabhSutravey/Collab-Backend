@@ -18,6 +18,7 @@ public class Friend {
 	private int userid;
 	private int friendid;
 	private char status;   //n-newly sent, a-approved, r-rejected, u-unfriend
+	
 	public int getId() {
 		return id;
 	}

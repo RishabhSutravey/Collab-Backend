@@ -3,6 +3,8 @@ package com.niit.collab.controllers;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,10 @@ public class ForumController {
 	@Autowired
 	ForumDAO forumDAO;
 	@PostMapping("/createforum")
-	public ResponseEntity<Forum> createforum(@RequestBody Forum forum){
+	public ResponseEntity<Forum> createforum(@RequestBody Forum forum,HttpSession session){
+		int uid=(Integer) session.getAttribute("uid");
 		forum.setDoc(new Date());
+		forum.setUserid(uid);
 		forumDAO.saveOrUpdate(forum);
 		return new ResponseEntity<Forum>(forum ,HttpStatus.OK);
 	}
