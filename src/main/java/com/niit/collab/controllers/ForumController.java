@@ -44,4 +44,9 @@ public class ForumController {
 		forumDAO.delete(forum1);
 		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
 	}
+	@GetMapping(value="/individualforum/{id}")
+	public ResponseEntity<Forum> individualforum(@PathVariable("id") int id){
+		Forum forum=forumDAO.getforum(id);
+		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
+	}
 }

@@ -1,5 +1,8 @@
 package com.niit.collab.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,4 +41,11 @@ public class JobDAOImpl implements JobDAO {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Transactional
+	public List<Job> list(){
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(Job.class);
+		List<Job> list=c.list();
+		return list;
+	}
 }
