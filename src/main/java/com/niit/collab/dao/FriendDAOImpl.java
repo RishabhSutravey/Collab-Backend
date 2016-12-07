@@ -44,35 +44,11 @@ public class FriendDAOImpl implements FriendDAO {
 		}
 	}
 
-   @Transactional
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Friend getFriend(int id) {
-		String hql = "from Friend where id= "+ "'"+ id+"'" ;
-		Query query=sessionFactory.getCurrentSession().createQuery(hql);
-		List<Friend>list= query.list();
-		
-		if(list==null)
-		{
-			return null;
-		}
-		else
-		{
-			return list.get(0);
-		}
-	}
-	
-@Transactional
-	@SuppressWarnings("unchecked")
-	public List<Friend> list() {
-		Criteria c=sessionFactory.getCurrentSession().createCriteria(Friend.class);
-		List<Friend> list = c.list();
-		return list;
-	}
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 @Transactional
-public Friend newrequest(int id) {
-	String hql="from Friend where fid = "+"'"+id+"'"+"and status= 'n'";
+public Friend newrequest(String uid,String fid) {
+	String hql="from Friend where userid='"+uid+"' and friendid='"+fid+"'";
 	Query query =sessionFactory.getCurrentSession().createQuery(hql);
 	List<Friend> list=query.list();
 	if(list==null){
@@ -83,10 +59,34 @@ public Friend newrequest(int id) {
 }
 
 @Transactional
-public List<Friend> getfriendlist(int uid) {
-	String hql="from Friend where userid= "+uid;
+public List<Friend> getfriendlist(String uid) {
+	String hql="from Friend where userid='"+uid+"' and status='a'";
 	Query query=sessionFactory.getCurrentSession().createQuery(hql);
 	List<Friend> list = query.list();
+	return list;
+}
+
+@Transactional
+public List<Friend> getrequestlist(String uid) {
+	String hql="from Friend where friendid='"+uid+"' and status='n'";
+	Query query=sessionFactory.getCurrentSession().createQuery(hql);
+	List<Friend> list = query.list();
+	return list;
+}
+
+@Transactional
+public Friend setonline(String uid) {
+	String hql="from Friend where userid='"+uid+"' or friendid='"+uid+"'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	List<Friend> list=query.list();
+	return list.get(0);
+}
+
+@Transactional
+public List<Friend> getonlinefriends(String uid) {
+	String hql="from Friend where userid='"+uid+"'and isonline='o' and status='a'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	List<Friend> list=query.list();
 	return list;
 }
 
