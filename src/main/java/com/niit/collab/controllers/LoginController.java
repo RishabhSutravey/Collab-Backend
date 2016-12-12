@@ -29,15 +29,26 @@ public class LoginController {
 		Users users = usersDAO.authuser(username,password);
 		if(users==null)
 			{	return null;
+	}else if(friendDAO.getfriendlist(username)==null){
+		session.setAttribute("userLogged", users);
+		session.setAttribute("uid", users.getId());
+		session.setAttribute("username",users.getUsername());
+		users.setStatus('o');
+		usersDAO.saveOrUpdate(users);
+		List<Users> users1=usersDAO.getuser(users.getId());
+		return new ResponseEntity<List<Users>>(users1,HttpStatus.OK);
 	}else{
 		session.setAttribute("userLogged", users);
 		session.setAttribute("uid", users.getId());
 		session.setAttribute("username",users.getUsername());
 		users.setStatus('o');
 		usersDAO.saveOrUpdate(users);
-    	//Friend friend=friendDAO.setonline(users.getUsername());
-    	//friend.setIsonline('o');
-	    //friendDAO.saveOrUpdate(friend);
+    	List<Friend> friend=friendDAO.setonline(users.getUsername());
+    	for(int i=0;i<friend.size();i++){
+    		Friend online=friend.get(i);
+    		online.setIsonline('o');
+    		friendDAO.saveOrUpdate(online);
+    	}
 		List<Users> users1=usersDAO.getuser(users.getId());
 		return new ResponseEntity<List<Users>>(users1,HttpStatus.OK);
 	}
@@ -45,12 +56,15 @@ public class LoginController {
 	@PostMapping("/logout")
 	public ResponseEntity<Users> logout(HttpSession session){
 		int uid =  (Integer) session.getAttribute("uid");
-		Users users =usersDAO.logout(uid);
+		Users users =usersDAO.oneuser(uid);
 		users.setStatus('f');
 		usersDAO.saveOrUpdate(users);
-		Friend friend=friendDAO.setonline(users.getUsername());
-    	friend.setIsonline('f');
-	    friendDAO.saveOrUpdate(friend);
+		List<Friend> friend=friendDAO.setonline(users.getUsername());
+		for(int i=0;i<friend.size();i++){
+    		Friend online=friend.get(i);
+    		online.setIsonline('f');
+    		friendDAO.saveOrUpdate(online);
+    	}
 		session.invalidate();
 		return new ResponseEntity<Users>(users,HttpStatus.OK);
 	}

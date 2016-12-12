@@ -69,4 +69,9 @@ public ResponseEntity<Friend> rejectfriend(@PathVariable("fid") String fid,HttpS
 	friendDAO.saveOrUpdate(friend);
 	return new ResponseEntity<Friend>(HttpStatus.OK);
 }
+@PostMapping("/unfriend/{fid}")
+public ResponseEntity<Friend> unfriend(@PathVariable("fid") String fid,HttpSession session){
+	return null;
+	
+}
 }

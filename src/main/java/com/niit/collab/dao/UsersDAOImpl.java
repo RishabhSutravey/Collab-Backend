@@ -83,7 +83,7 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 	}
 	@Transactional
-	public Users logout(int id) {
+	public Users oneuser(int id) {
 		String hql = "from Users where id= "+ "'"+ id+"'" ;
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<Users>list= query.list();
@@ -96,6 +96,28 @@ public class UsersDAOImpl implements UsersDAO {
 		{
 			return list.get(0);
 		}
+	}
+	@Transactional
+	public Users profileof(String username) {
+		String hql="from Users where username='"+username+"'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<Users>list= query.list();
+		
+		if(list==null)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+	}
+	@Transactional
+	public List<Users> nonfriends(int id) {
+		String hql = "from Users where id !='"+id+"'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<Users> list= query.list();
+		return list;
 	}
 
 }

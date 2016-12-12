@@ -75,19 +75,19 @@ public List<Friend> getrequestlist(String uid) {
 }
 
 @Transactional
-public Friend setonline(String uid) {
-	String hql="from Friend where userid='"+uid+"' or friendid='"+uid+"'";
+public List<Friend> setonline(String uid) {
+	String hql="from Friend where friendid='"+uid+"'";
 	Query query = sessionFactory.getCurrentSession().createQuery(hql);
 	List<Friend> list=query.list();
-	return list.get(0);
+	return list;
 }
 
-@Transactional
+/*@Transactional
 public List<Friend> getonlinefriends(String uid) {
 	String hql="from Friend where userid='"+uid+"'and isonline='o' and status='a'";
 	Query query = sessionFactory.getCurrentSession().createQuery(hql);
 	List<Friend> list=query.list();
 	return list;
-}
+}*/
 
 }

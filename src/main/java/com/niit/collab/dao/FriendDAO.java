@@ -11,7 +11,7 @@ public interface FriendDAO {
 	public Friend newrequest(String uid,String fid);
 	public List<Friend> getfriendlist(String uid);
 	public List<Friend> getrequestlist(String uid);
-	public Friend setonline(String uid);
-	public List<Friend> getonlinefriends(String uid);
+	public List<Friend> setonline(String uid);
+	//public List<Friend> getonlinefriends(String uid);
 
 }
