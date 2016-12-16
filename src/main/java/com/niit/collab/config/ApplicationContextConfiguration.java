@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.niit.collab.dao.BlogDAO;
 import com.niit.collab.dao.BlogDAOImpl;
+import com.niit.collab.dao.BlogLikesDAO;
+import com.niit.collab.dao.BlogLikesDAOImpl;
 import com.niit.collab.dao.EventDAO;
 import com.niit.collab.dao.EventDAOImpl;
 import com.niit.collab.dao.ForumCommentDAO;
@@ -30,6 +32,7 @@ import com.niit.collab.dao.JobDAOImpl;
 import com.niit.collab.dao.UsersDAO;
 import com.niit.collab.dao.UsersDAOImpl;
 import com.niit.collab.model.Blog;
+import com.niit.collab.model.BlogLikes;
 import com.niit.collab.model.Event;
 import com.niit.collab.model.Forum;
 import com.niit.collab.model.ForumComment;
@@ -75,6 +78,7 @@ public SessionFactory getSessionFactory(DataSource dataSource){
 	sessionBuilder.addAnnotatedClass(Job.class);
 	sessionBuilder.addAnnotatedClass(Friend.class);
 	sessionBuilder.addAnnotatedClass(ForumComment.class);
+	sessionBuilder.addAnnotatedClass(BlogLikes.class);
 	return sessionBuilder.buildSessionFactory();
 	
 }
@@ -128,4 +132,10 @@ public FriendDAO getFriendDAO(SessionFactory sessionFactory){
 public ForumCommentDAO getForumCommentDAO(SessionFactory sessionFactory){
 	return new ForumCommentDAOImpl(sessionFactory);
 }
+@Autowired
+@Bean(name="blogLikesDAO")
+public BlogLikesDAO getBlogLikesDAO(SessionFactory sessionFactory){
+	return new BlogLikesDAOImpl(sessionFactory);
+}
+
 }
