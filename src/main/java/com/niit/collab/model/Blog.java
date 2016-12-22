@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Table
 @Component
 public class Blog {
-	@Id
+@Id
 	@GeneratedValue
 	private int id;
 	private String title;
-	private int userid;
+	private String userid;
 	private Date doc;
 	private String content;
 	private Integer bloglike;
@@ -33,10 +33,10 @@ public class Blog {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 	

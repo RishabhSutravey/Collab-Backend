@@ -19,7 +19,7 @@ public class Forum {
 	private int id;
 	private String name;
 	private String topic;
-	private int userid;
+	private String userid;
 	private Date doc;
 	private String description;
 	public int getId() {
@@ -40,10 +40,10 @@ public class Forum {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 	public Date getDoc() {

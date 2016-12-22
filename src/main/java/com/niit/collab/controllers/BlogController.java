@@ -31,7 +31,9 @@ private BlogLikesDAO blogLikesDAO;
 @PostMapping(value="/createblog")
 public ResponseEntity<Blog> addblog(@RequestBody Blog blog,HttpSession session){
 	System.out.println("hello");
-	int uid=(Integer) session.getAttribute("uid");
+	String name=blog.getTitle();
+	System.out.println(name);
+	String uid=(String) session.getAttribute("username");
 	blog.setDoc(new Date());
 	blog.setUserid(uid);
 	blogDAO.saveOrUpdate(blog);

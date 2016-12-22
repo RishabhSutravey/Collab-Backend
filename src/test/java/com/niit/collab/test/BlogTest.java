@@ -27,7 +27,7 @@ public class BlogTest {
 		//blog.setId(3);
 		blog.setTitle("APPle");
 		blog.setContent("this is mobile category");
-		blog.setUserid(12);
+		blog.setUserid("fhsdh");
 		blog.setDoc(new Date());
 //blogDAO.delete(blog);
 		if (blogDAO.saveOrUpdate(blog) == true) {

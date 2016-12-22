@@ -44,7 +44,7 @@ import com.niit.collab.model.Users;
 @Configuration
 @ComponentScan("com.niit.collab")
 @EnableTransactionManagement
-@EnableWebMvc
+
 public class ApplicationContextConfiguration {
 
 	
