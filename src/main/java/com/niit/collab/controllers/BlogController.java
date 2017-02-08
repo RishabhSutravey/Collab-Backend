@@ -43,9 +43,17 @@ public ResponseEntity<Blog> addblog(@RequestBody Blog blog,HttpSession session){
 @GetMapping(value="/blog")
 public ResponseEntity<List<Blog>> listblog(){
 	System.out.println("list of blog");
+	List<Blog> blog =blogDAO.userlist();
+	return new ResponseEntity<List<Blog>>(blog,HttpStatus.OK);
+}
+
+@GetMapping(value="/adminblog")
+public ResponseEntity<List<Blog>> adminblog(){
+	System.out.println("list of blog");
 	List<Blog> blog =blogDAO.list();
 	return new ResponseEntity<List<Blog>>(blog,HttpStatus.OK);
 }
+
 @DeleteMapping(value="/deleteblog/{blogid}")
 public ResponseEntity<Blog> deleteblog(Blog blog,@PathVariable("blogid") int blogid){
 	Blog blog1=blogDAO.get(blogid);
